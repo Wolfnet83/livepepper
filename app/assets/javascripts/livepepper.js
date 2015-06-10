@@ -19,7 +19,4 @@ livepepper.controller("mainController", ['$scope','$http',
         });
     };
 
-    $scope.startDrag = function(){
-      //console.log(data);
-    };
   }]);

@@ -1,7 +1,10 @@
 class CategoryController < ApplicationController
   def index
     @categories = Category.all
-    render json: @categories
+    respond_to do |format|
+      format.html
+      format.json { render json: @categories }
+    end
   end
 
   def new
@@ -27,5 +30,8 @@ class CategoryController < ApplicationController
   end
 
   def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to :root
   end
 end

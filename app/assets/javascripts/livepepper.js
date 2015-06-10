@@ -4,7 +4,7 @@ livepepper.controller("mainController", ['$scope','$http',
   function($scope, $http){
 
     $scope.loadCategories = function(){
-      $http.get('/category')
+      $http.get('/category?format=json')
         .success(function(data) {
           $scope.categories = data;
           console.log(data);

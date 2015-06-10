@@ -1,2 +1,7 @@
-%h1 Products#index
-%p Find me in app/views/products/index.html.haml
+%div{"ng-app"=>"livepepper"}
+  %h1 Products
+
+  %div{"ng-if"=>"name"}
+    Hello, {{name}}
+  %form.form-inline
+    %input.form-control{"ng-model"=>"name"}

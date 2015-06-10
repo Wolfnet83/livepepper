@@ -1,0 +1,16 @@
+.content-desktop
+  %div{"infinite-scroll" => "loadMoreMovies()", "infinite-scroll-distance" => "1", "infinite-scroll-disabled" => "loading"}
+    // Include page description scope
+    %div{"ng-include" => "'partials/_page_description.html'"} 
+    / recently added movies
+    %div{"ng-repeat" => "item in recentlyLovedMovies"}
+      .well.well-sm.row.recently-loved-header{"ng-show" => "item.movies.length > 0"}
+        .col-lg-12
+          %h3 
+            %a{:href => "/#/profile/{{ item.user.id }}" }
+              {{ item.user | user_name }} 
+            rated these movies:
+          %h3
+      .movies-container.row
+        %div{"ng-repeat" => "movie in item.movies"}
+          %div{"ng-include" => "'partials/movies/_movie.html'"}

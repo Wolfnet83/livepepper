@@ -1,7 +1,12 @@
-%div{"ng-app"=>"livepepper"}
-  %h1 Products
-
-  %div{"ng-if"=>"name"}
-    Hello, {{name}}
-  %form.form-inline
-    %input.form-control{"ng-model"=>"name"}
+- if @products.any?
+  %table
+    - @products.each do |product|
+      %tr
+        %td
+          product.name
+        %td
+          product.description
+        %td
+          product.price
+- else
+  %h1 There is no products yet

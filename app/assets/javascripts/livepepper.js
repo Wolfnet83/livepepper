@@ -7,7 +7,6 @@ livepepper.controller("mainController", ['$scope','$http',
       $http.get('/category?format=json')
         .success(function(data) {
           $scope.categories = data;
-          //console.log(data);
         });
     };
 
@@ -15,7 +14,7 @@ livepepper.controller("mainController", ['$scope','$http',
       console.log(product, cat_id);
       $http.put('/category/' + cat_id + '/product', {product_id: product.id})
         .success(function(){
-         $scope.loadCategories();
+          return(product);
         });
     };
 

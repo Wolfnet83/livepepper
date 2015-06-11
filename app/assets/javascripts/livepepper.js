@@ -7,15 +7,15 @@ livepepper.controller("mainController", ['$scope','$http',
       $http.get('/category?format=json')
         .success(function(data) {
           $scope.categories = data;
-          console.log(data);
+          //console.log(data);
         });
     };
 
-    $scope.loadProducts = function(){
-      $http.get('/products/index')
-        .success(function(data) {
-          $scope.products = data;
-          console.log(data);
+    $scope.dropHere = function(product, cat_id){
+      console.log(product, cat_id);
+      $http.put('/category/' + cat_id + '/product', {product_id: product.id})
+        .success(function(){
+         $scope.loadCategories();
         });
     };
 

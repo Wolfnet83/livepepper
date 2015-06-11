@@ -1,13 +1,17 @@
-.container
-  %div{"ng-app"=>"livepepper", "ng-controller" => "mainController"}
+%div{"ng-app"=>"livepepper", "ng-controller" => "mainController"}
 
-    %button{"ng-click" => "loadCategories()"}
-      Load Categories
-    %button{"ng-click" => "loadProducts()"}
-      Load Products
-    %br
+  %button{"ng-click" => "loadCategories()"}
+    Load Categories
 
-    %ul.list-group{"dnd-list" => "categories"}
-      %li.list-group-item{"ng-repeat"=>"category in categories", "dnd-draggable"=>"category", "dnd-moved"=>"categories.splice($index,1)"}
-        {{ category.name }}
 
+  %ul.list-group{"dnd-list" => "categories"}
+    %li.list-group-item{"ng-repeat"=>"cat in categories.category", "dnd-draggable"=>"cat", "dnd-moved"=>"categories.splice($index,1)"}
+      {{ cat.id }}
+      {{ cat.name }}
+
+      %ul.list-group{"dnd-list" => "cat.products", "dnd-drop" => 'dropHere(item, cat.id)'}
+        %li.list-group-item{"ng-repeat"=>"product in cat.products", "dnd-draggable"=>"product", "dnd-moved"=>"cat.products.splice($index,1)"}
+          {{ product.id }}  
+          {{ product.name }}  
+          {{ product.description }}  
+          {{ product.price }}  

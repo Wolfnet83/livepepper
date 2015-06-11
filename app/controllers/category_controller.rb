@@ -23,7 +23,10 @@ class CategoryController < ApplicationController
     @category = Category.new
     @category.name = params[:name]
     @category.save
-    redirect_to category_index_path
+    respond_to do |format|
+      format.html {redirect_to category_index_path} 
+      format.json { render json: @category }
+    end
   end
 
   def update
@@ -32,6 +35,9 @@ class CategoryController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to :root
+    respond_to do |format|
+      format.html {redirect_to category_index_path} 
+      format.json { render nothing: true }
+    end
   end
 end

@@ -3,11 +3,16 @@
   %button{"ng-click" => "loadCategories()"}
     Load Categories
 
+  %form.form-inline{"ng-submit" => "addCategory()"}
+    %input.form-control{type: :text, placeholder: "Enter the category", "ng-model" => "cat_name"}
+    %input{type: :submit, value: "Add"}
 
   %ul.list-group{"dnd-list" => "categories"}
     %li.list-group-item{"ng-repeat"=>"cat in categories.category", "dnd-draggable"=>"cat", "dnd-moved"=>"categories.splice($index,1)"}
       {{ cat.id }}
       {{ cat.name }}
+      %button{href: "#", "ng-click" => "deleteCategory(cat)"}
+        %span.glyphicon.glyphicon-minus
 
       %ul.list-group{"dnd-list" => "cat.products", "dnd-drop" => 'dropHere(item, cat.id)'}
         %li.list-group-item{"ng-repeat"=>"product in cat.products", "dnd-draggable"=>"product", "dnd-moved"=>"cat.products.splice($index,1)"}
@@ -15,3 +20,10 @@
           {{ product.name }}  
           {{ product.description }}  
           {{ product.price }}  
+        .well{"ng-show" => "cat.products.length == 0"}
+          Drop here!
+      %form.form-inline{"ng-submit" => "addProduct(name, desc, price, cat.id)"}
+        %input.form-control{type: :text, placeholder: "Name", "ng-model" => "name"}
+        %input.form-control{type: :text, placeholder: "Description", "ng-model" => "desc"}
+        %input.form-control{type: :text, placeholder: "Price", "ng-model" => "price"}
+        %input{type: :submit, value: "Add product"}
